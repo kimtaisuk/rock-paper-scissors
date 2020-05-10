@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="utf-8"/></head>
+    <body>
+        <h1>Rock - Paper - Scissor</h1>
+        <script>
+
+
+            function game() {
+                // For loop for 5 times
+                let i;
+                let i_end = 5;
+                for (i = 0; i < i_end; i++) {
+                    let playerSelection = prompt("Choose either Rock, Paper or Scissor: ");
+                
+                    //Make the user input case-insensitive
+                    playerSelection = capitalize(playerSelection);
+                    computerSelection = capitalize(computerPlay());
+
+                    current_round = i+1;
+
+                    let rps_array =  ["Rock", "Paper", "Scissor"]; //Use this to validat the user's input.
+                    if (rps_array.includes(playerSelection)) {
+                        console.log("Round " + current_round.toString() + " out of " + i_end.toString());
+                        console.log(playRound(playerSelection,computerPlay()));
+                    }    
+                    else {
+                        console.log("Round " + current_round.toString() + " out of " + i_end.toString());
+                        console.log("Try again! You selected a wrong hand, " + playerSelection + ". Please pick one of Rock, Paper or Scissor.")
+                        i -= 1;
+                    }
+
+
+                }
+
+                function capitalize(str) {
+                    str = str.toLowerCase();
+                    return str.replace(str.charAt(0),str.charAt(0).toUpperCase()); //first character capitalized;
+                }
+
+                // Computer's Play Function
+                function computerPlay() {
+                    let rps_array =  ["Rock", "Paper", "Scissor"];
+                    let computerSelection = rps_array[Math.floor(3*Math.random())];
+                    return computerSelection;                
+                } 
+
+                // PlayRound Function: User vs Computer
+                function playRound(playerSelection,computerSelection) {
+
+
+                    // Assign number for each hand
+                    function handToNumber(hand) {                
+                        switch (hand) {
+                        case "Rock":
+                            return hand = 1;
+                        break;
+                        case "Paper":
+                            return hand = 2;
+                        break;
+                        case "Scissor":
+                            return hand = 3;
+                        break;
+                        default:
+                            return hand = NaN;
+                        }
+                    }
+                    let playerNumber = handToNumber(playerSelection);
+                    let computerNumber = handToNumber(computerSelection);
+                    let match_result = playerNumber - computerNumber;
+
+                    let message = "";
+
+                        if (match_result == 0) {
+                            message = "DRAW! You and the computer choose the same hand, " + playerSelection + " and " + computerSelection;
+                        }
+                        else if (match_result == 1 || match_result == -2){
+                            message = "WON! Your " +playerSelection + " beats the computer's " + computerSelection;
+                        }
+                        // if (match_result == 2 || match_result == -1)
+                        else {
+                            message = "LOST! the computer's " + computerSelection + " beats your " + playerSelection;
+                        }
+
+
+                    return message;
+                } 
+
+            }
+        </script>
+    </body>
+</html>
