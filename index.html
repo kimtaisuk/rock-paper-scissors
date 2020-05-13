@@ -1,92 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head><meta charset="utf-8"/></head>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer> </script> <!-- async was firing transition on load... -->  
+    </head>
     <body>
-        <h1>Rock - Paper - Scissor</h1>
-        <script>
+        <header>
+            <div id="title">
+                <h1>Rock Paper Scissors</h1>
+                <div class="top-bar"><span>Play until one player reaches 5 points.</span></div>
+                <div id="score-bar" class="top-bar"><span id="player-score">0</span><span> vs </span><span id="computer-score"> 0 </span></div>
+
+            </div>
+        </header>
+
+        <div id="play-field">
+            <div id="player-box" class="hand-box">
+                <div class="pf-title">
+                    <h2 id="player-title">YOUR CHOICE</h2>
+                </div>
+                <div id="player-choice" class="choice-box">
+                    <div class="hand-image rock-image player-hand-image hand-image-transition" id="rock">
+                        <span class="hover-text" id="rock">Rock</span>
+                    </div>
+                    <div class="hand-image paper-image player-hand-image" id="paper">
+                        <span class="hover-text" id="paper">Paper</span>
+                    </div>
+                    <div class="hand-image scissors-image player-hand-image" id="scissors">
+                        <span class="hover-text" id="scissors">Scissors</span>
+                    </div>
+                </div>    
+
+            </div>
+
+            <div id="status-box"><p id="status-result"></p></div>
+    
+            <div id="computer-box" class="hand-box">
+                <div class="pf-title" >
+                    <h2 id="computer-title">COMPUTER</h2>
+                </div>
+                <div id="computer-choice" class="choice-box">
+                    <div class="hand-image rock-image computer-hand-image">
+                        <span class="hover-text">Rock</span>
+                    </div>
+                    <div class="hand-image paper-image computer-hand-image">
+                        <span class="hover-text">Paper</span>
+                    </div>
+                    <div class="hand-image scissors-image computer-hand-image">
+                        <span class="hover-text">Scissors</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 
-            function game() {
-                // For loop for 5 times
-                let i;
-                let i_end = 5;
-                for (i = 0; i < i_end; i++) {
-                    let playerSelection = prompt("Choose either Rock, Paper or Scissor: ");
-                
-                    //Make the user input case-insensitive
-                    playerSelection = capitalize(playerSelection);
-                    computerSelection = capitalize(computerPlay());
-
-                    current_round = i+1;
-
-                    let rps_array =  ["Rock", "Paper", "Scissor"]; //Use this to validat the user's input.
-                    if (rps_array.includes(playerSelection)) {
-                        console.log("Round " + current_round.toString() + " out of " + i_end.toString());
-                        console.log(playRound(playerSelection,computerPlay()));
-                    }    
-                    else {
-                        console.log("Round " + current_round.toString() + " out of " + i_end.toString());
-                        console.log("Try again! You selected a wrong hand, " + playerSelection + ". Please pick one of Rock, Paper or Scissor.")
-                        i -= 1;
-                    }
+        <footer id="result-bar">
+            <div id="status-bar">
+                <p id="status-message">Choose Rock, Paper, or Scissors</p>
+            </div>
+        </footer>
+   
 
 
-                }
-
-                function capitalize(str) {
-                    str = str.toLowerCase();
-                    return str.replace(str.charAt(0),str.charAt(0).toUpperCase()); //first character capitalized;
-                }
-
-                // Computer's Play Function
-                function computerPlay() {
-                    let rps_array =  ["Rock", "Paper", "Scissor"];
-                    let computerSelection = rps_array[Math.floor(3*Math.random())];
-                    return computerSelection;                
-                } 
-
-                // PlayRound Function: User vs Computer
-                function playRound(playerSelection,computerSelection) {
-
-
-                    // Assign number for each hand
-                    function handToNumber(hand) {                
-                        switch (hand) {
-                        case "Rock":
-                            return hand = 1;
-                        break;
-                        case "Paper":
-                            return hand = 2;
-                        break;
-                        case "Scissor":
-                            return hand = 3;
-                        break;
-                        default:
-                            return hand = NaN;
-                        }
-                    }
-                    let playerNumber = handToNumber(playerSelection);
-                    let computerNumber = handToNumber(computerSelection);
-                    let match_result = playerNumber - computerNumber;
-
-                    let message = "";
-
-                        if (match_result == 0) {
-                            message = "DRAW! You and the computer choose the same hand, " + playerSelection + " and " + computerSelection;
-                        }
-                        else if (match_result == 1 || match_result == -2){
-                            message = "WON! Your " +playerSelection + " beats the computer's " + computerSelection;
-                        }
-                        // if (match_result == 2 || match_result == -1)
-                        else {
-                            message = "LOST! the computer's " + computerSelection + " beats your " + playerSelection;
-                        }
-
-
-                    return message;
-                } 
-
-            }
-        </script>
     </body>
 </html>
